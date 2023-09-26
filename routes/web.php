@@ -16,3 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('demo/{name}/{id?}/{com?}', function (string $name,int $id=null,string $com=null) {
+    if($id){
+
+        $data = compact('name','id','com');
+        return view('demo')->with($data);
+    }else{
+        return '<script>alert("please pass id")</script>';
+    }
+})->whereAlpha('name')->whereNumber('id')->whereIn('com',['movie','song','webseries']);
+Route::view('/post','pos');
